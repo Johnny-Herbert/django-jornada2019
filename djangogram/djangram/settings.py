@@ -83,6 +83,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'users.User' #para pegar os usuarios do app users e não o padrao do django
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

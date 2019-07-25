@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Djangram | Lista de posts
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/posts.css' %}">
+{% endblock %}
+
+{% block body %}
+<div style="position:absolute; width: 500px; height: 500px; background-color: red;">
+        <div style="position: relative; background-color: white; height: 300px; width: 400px">
+                <div style="position: absolute; background-color: black; height: 100px; width: 100px; right:0;">
+                
+                </div>
+        </div>
+</div>
+    {% for p in posts %}
+        <img class="" src="{{ p.auth.picture.url }}">
+        <p>{{ p.auth }}</p>
+        <p>{{ p.modified_at }}</p>    
+        <img src="{{ p.image.url }}"  alt="Imagem do post">
+        <p>{{ p.description }}</p>
+    {% empty %}
+        <h2>Poxa, você não tem nenhum posta ainda :(</h2>    
+    {% endfor %}
+{% endblock %}
