@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Djangram | Perfil {% endblock title %}
+
+{% block body %}
+    <section>
+        <div>
+            <p>{{ user.username }}</p>
+            <img src="{{ user.picture.url }}" width="50px" height="50px">
+            <a href="{% url 'users:update_user' user.pk %}">Editar Perfil</a>
+            {% for posts in user.posts.all %}
+                <p>{{ posts.description }}</p>
+            {% empty %}
+                <p class="message"> Poxa, você nao tem nenhum post ainda</p>    
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock body %}

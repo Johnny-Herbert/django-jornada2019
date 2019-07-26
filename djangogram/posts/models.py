@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Post(models.Model):
-    auth = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Autor')
+    auth = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='posts', verbose_name='Autor')
     image = models.ImageField(verbose_name='Imagem', upload_to='posts/')
     description = models.CharField(max_length=256, verbose_name='Descrição')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')

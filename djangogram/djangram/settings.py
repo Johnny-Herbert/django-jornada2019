@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'core',
     'posts',
     'users',
+
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -84,6 +87,9 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'users.User' #para pegar os usuarios do app users e não o padrao do django
+LOGIN_URL = 'users:login_user'
+LOGIN_REDIRECT_URL = 'posts:create_post'
+LOGOUT_REDIRECT_URL = 'users:login_user'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

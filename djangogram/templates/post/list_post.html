@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block body %}
+{% if messages %}
+    {% for message in messages %}
+        <p class="message">{{ message }}</p>
+    {% endfor %}
+{% endif %}
 <div style="position:absolute; width: 500px; height: 500px; background-color: red;">
         <div style="position: relative; background-color: white; height: 300px; width: 400px">
                 <div style="position: absolute; background-color: black; height: 100px; width: 100px; right:0;">
