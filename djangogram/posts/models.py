@@ -15,3 +15,16 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Postagem'
         verbose_name_plural = 'Postagens'
+    
+class Comment(models.Model):
+    auth =  models.ForeignKey('users.User', verbose_name='Autor', related_name='commentsFromUser', on_delete=models.CASCADE)#related_name vai deixar voce acessar os comentarios a partir do usuario
+    post = models.ForeignKey('posts.Post', verbose_name='Post', related_name='commentsFromPost', on_delete=models.CASCADE)
+    text = models.TextField(verbose_name='Texto')
+    created_at = models.DateTimeField(verbose_name='Criado em',auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment {self.id} | Author {self.auth} | Post {self.post.pk} | Created at {self.created_at}'
+
+    class Meta:
+        verbose_name = 'Comentário'
+        verbose_name_plural = 'Comentarios'

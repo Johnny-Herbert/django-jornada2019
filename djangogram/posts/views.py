@@ -7,6 +7,8 @@ from django.urls import reverse_lazy
 from posts.models import Post
 from posts.forms import PostCreateForm
 
+from posts.mixins import UserHasAccessToDeletePostMixin
+
 # Create your views here.
 
 class PostListView(LoginRequiredMixin,generic.ListView):
@@ -31,3 +33,16 @@ class PostCreateView(LoginRequiredMixin,generic.CreateView):
             'Você compartilhou um novo post! Confira abaixo'
         )
         return super().form_valid(form)
+
+class PostDetailView(generic.DetailView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'post/detail_post.html'
+
+class PostDeleteView(UserHasAccessToDeletePostMixin,generic.DeleteView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'post/delete_post.html'
+
+    def get_success_url(self):
+        return reverse_lazy('users:detail_user', args=[self.object.auth.pk])

@@ -1,3 +1,9 @@
 body{
-    background-color: blue;
+    background-color: gray;
+}
+
+.img-user-post
+{
+    width: 100px;
+    height: 100px;
 }
