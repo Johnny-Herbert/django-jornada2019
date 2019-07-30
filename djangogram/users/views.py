@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
 from users.forms import UserSignupForm
-
+from users.helpers import send_confirm_user_signup_email
 from users.models import User
 from users.mixins import UserHasAccessToDetailMixin
 
@@ -29,15 +29,13 @@ class UserSignupView(generic.CreateView):
     form_class = UserSignupForm
     template_name = 'users/signup_user.html'
     success_url = reverse_lazy('users:login_user')
-    # def form_valid(self, form):
-    #     import ipdb; ipdb.set_trace()
-    #     send_email(
-    #         subject='Djangram | Cadastrado com sucesso',
-    #         message='Olá, você se cadastrou com sucesso no sistema',
-    #         from_email='',
-    #         recipient_list=[]
-    #     )
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        #self.object = form.save()
+        self.object = form.save(commit=False)
+        self.object.save()
+        import ipdb; ipdb.set_trace()
+        send_confirm_user_signup_email(self.object)
+        return super().form_valid(form)
 
 class UserUpdateView(UserHasAccessToDetailMixin,generic.UpdateView):
     model = User
