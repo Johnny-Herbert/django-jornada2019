@@ -7,6 +7,7 @@ class CommentInline(admin.StackedInline):
 class PostAdmin(admin.ModelAdmin):
     list_filter = ('auth', 'created_at')
     inlines = [CommentInline]
+    search_fields = ('auth__username', 'description')
 
 
 # Register your models here.
