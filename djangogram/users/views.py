@@ -23,6 +23,12 @@ class UserDetailView(generic.DetailView):
     model = User
     contex_object_name = 'user'
     template_name = 'users/detail_user.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        request_user = User.objects.get(pk=self.request.user.pk)
+        follow_user = kwargs['object']
+        context['request_user_has_followed'] = request_user.following.filter(pk=follow_user.pk).exists()
+        return context
 
 class UserSignupView(generic.CreateView):
     model = User
@@ -44,3 +50,20 @@ class UserUpdateView(UserHasAccessToDetailMixin,generic.UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('users:detail_user', args={self.object.pk})
+
+class UserFollowView(generic.RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        #user logado
+        request_user = User.objects.get(pk=self.request.user.pk)
+        #user que se quer seguir ou deiar de seguir
+        follow_user = User.objects.get(pk=kwargs['pk'])
+        #checa se o user logado ja segue o user que esta interagindo
+        request_user_has_followed = request_user.following.filter(pk=follow_user.pk).exists()
+
+        if not request_user_has_followed:
+            request_user.following.add(follow_user)
+            follow_user.followers.add(request_user)
+        else:
+            request_user.following.remove(follow_user)
+            follow_user.followers.remove(request_user)
+        return reverse_lazy('users:detail_user', args=[follow_user.pk])

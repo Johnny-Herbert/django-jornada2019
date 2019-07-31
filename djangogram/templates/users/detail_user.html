@@ -16,7 +16,31 @@
             {% empty %}
                 <p class="message"> Poxa, você nao tem nenhum post ainda</p>    
             {% endfor %}
-            
+            <a href="{% url 'users:follow_user' user.pk %}">
+                {% if request_user_has_followed %}
+                    Seguindo
+                {% else %}
+                    Seguir
+                {% endif %}
+            </a>
+            <div>
+                {% if user.following.all %}
+                    <div>
+                        <h2>Seguindo:</h2>
+                        {% for following in user.following.all %}
+                        <p>{{ following.username }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if user.followers.all %}
+                    <div>
+                        <h2>Seguidores:</h2>
+                        {% for follower in user.followers.all %}
+                            <p>{{ follower.username }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </section>
 {% endblock body %}
