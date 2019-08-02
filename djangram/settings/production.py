@@ -1,14 +1,12 @@
 from djangram.settings import base
+from decouple import config
+import django_heroku
 
-SECRET_KEY = 'i6jltnq+u_nrd66i3#y0mts$nf0&#jsgpz-k4!)9@yy3@bdz_5'
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = [] #todas as urls possiveis para acessar minha aplicação
-
-DATABASES = {
-
-}
+ALLOWED_HOSTS = ['.herokuapp.com'] #todas as urls possiveis para acessar minha aplicação
 
 #Dropbox
 
@@ -36,8 +34,10 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '824207761985-7jpi4ui3g9pdvgq4uiipec41qt5m81af.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'tmpQTGTG_bLGiMKRopR_s5YZ'
 
-EMAIL_HOST_USER = 'clientejosealcantara@gmail.com'
-EMAIL_HOST_PASSWORD = 'cliente123'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 DROPBOX_OAUTH2_TOKEN = config('DROPBOX_OAUTH2_TOKEN', default='')
+
+django_heroku.settings(locals())

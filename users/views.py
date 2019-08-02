@@ -39,7 +39,6 @@ class UserSignupView(generic.CreateView):
         #self.object = form.save()
         self.object = form.save(commit=False)
         self.object.save()
-        import ipdb; ipdb.set_trace()
         send_confirm_user_signup_email(self.object)
         return super().form_valid(form)
 

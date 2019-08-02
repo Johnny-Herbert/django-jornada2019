@@ -11,5 +11,4 @@ def send_confirm_user_signup_email(user):
             'user':user,
         }
     )
-    import ipdb; ipdb.set_trace()
     return send_templated_mail(**kwargs)
