@@ -1,4 +1,4 @@
-from djangram.settings import base
+from djangram.settings.base import *
 from decouple import config
 import django_heroku
 
