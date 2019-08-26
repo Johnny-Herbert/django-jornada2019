@@ -3,6 +3,10 @@
 
 {% block title %} Djangram | Perfil {% endblock title %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/detail-user.css' %}">
+{% endblock %}
+
 {% block body %}
     <section>
         <div>
@@ -10,12 +14,19 @@
             <img src="{{ user.picture.url }}" width="50px" height="50px">
             {% if user == request.user %}
                 <a href="{% url 'users:update_user' user.pk %}">Editar Perfil</a>
-            {% endif %}    
-            {% for posts in user.posts.all %}
-                <p>{{ posts.description }}</p>
-            {% empty %}
-                <p class="message"> Poxa, você nao tem nenhum post ainda</p>    
-            {% endfor %}
+            {% endif %}
+            <div class="container-geral-user">
+                <div class="container-geral-posts-user">
+                    {% for posts in user.posts.all %}
+                        <div class="container-posts-user">
+                            <img class="image-posts-user" src="{{ posts.image.url }}" alt="Imagem do post">
+                            <p>{{ posts.description }}</p>
+                        </div>
+                    {% empty %}
+                        <p class="message"> Poxa, você nao tem nenhum post ainda</p>
+                    {% endfor %}
+                </div>
+            </div>
             <a href="{% url 'users:follow_user' user.pk %}">
                 {% if request_user_has_followed %}
                     Seguindo

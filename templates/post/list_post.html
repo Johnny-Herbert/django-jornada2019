@@ -15,14 +15,28 @@
         <p class="message">{{ message }}</p>
     {% endfor %}
 {% endif %}
-    {% for p in posts %}
-        <img class="img-user-post" src="{{ p.auth.picture.url }}">
-        <p>{{ p.auth }}</p>
-        <p>{{ p.modified_at }}</p>    
-        <img class="" src="{{ p.image.url }}" alt="Imagem do post">
-        <p>{{ p.description }}</p>
-        <a href="{% url 'posts:detail_post' p.pk %}">Ver mais</a><br><br>
-    {% empty %}
-        <h2>Poxa, você não tem nenhum posta ainda :(</h2>    
-    {% endfor %}
+<section class="container-geral-posts">
+    <div class="container-list-posts">
+        {% for p in posts %}
+        <div class="container-informations">
+            <div class="container-auth-date">
+                <div class="container-auth">
+                    <img class="img-user-post" src="{{ p.auth.picture.url }}">
+                    <p>{{ p.auth }}</p>
+                </div>
+                <div class="container-date-list-post">
+                    <p>{{ p.modified_at }}</p>
+                </div>
+            </div>
+            <div class="container-image-description">
+                <img class="image-post" src="{{ p.image.url }}" alt="Imagem do post">
+                <p>{{ p.description }}</p>
+                <a href="{% url 'posts:detail_post' p.pk %}">Ver mais</a><br><br>
+            </div>
+        </div>
+            {% empty %}
+                <h2>Poxa, você não tem nenhum posta ainda :(</h2>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

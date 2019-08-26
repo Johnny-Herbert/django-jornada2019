@@ -2,8 +2,49 @@ body{
     background-color: gray;
 }
 
-.img-user-post
-{
-    width: 100px;
-    height: 100px;
+.container-geral-posts {
+    display: flex;
+    justify-content: center;
+}
+
+.container-informations {
+    margin: 10px;
+    border: solid 2px black;
+}
+
+.container-list-posts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.img-user-post {
+    width: 30px;
+    height: 30px;
+}
+
+.image-post {
+    width: 60%;
+    height: 50vh;
+}
+
+.container-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-image-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.container-date-list-post {
+    display: flex;
+    justify-content: center;
 }

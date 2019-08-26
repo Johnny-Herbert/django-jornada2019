@@ -3,11 +3,15 @@
 
 {% block title %} Djangram | Login {% endblock title %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block body %}
-<section>
-        <div>
-            <a href="{% url 'social:begin' 'google-oauth2' %}">Login com o google</a>
-            <form method="post">
+<section class="container-login-geral">
+        <div class="container-login">
+            <a class="login-google-button" href="{% url 'social:begin' 'google-oauth2' %}">Login com o google</a>
+            <form class="form-login" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Logar">

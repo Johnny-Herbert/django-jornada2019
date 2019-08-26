@@ -1,0 +1,24 @@
+.container-posts-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:  center;
+    width: 200px;
+    margin: 10px;
+}
+
+.container-geral-user {
+    display: flex;
+    justify-content: center;
+}
+
+.container-geral-posts-user {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.image-posts-user {
+    width: 200px;
+}
